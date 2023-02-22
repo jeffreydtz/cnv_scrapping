@@ -43,7 +43,7 @@ bandera = True
 
 page = 0
 
-while bandera:
+while bandera or (page==10):
     try:
         tbody = wait.until(EC.presence_of_element_located(
             (By.XPATH, '//*[@id="tablaagentes"]/tbody')))
@@ -259,8 +259,11 @@ while bandera:
 
 driver.quit()
 
-df = pd.DataFrame(diccionario_juridica)
+print(diccionario_juridica)
 
-writer = ExcelWriter('cnv_juridica.xlsx')
-df.to_excel(writer, 'Sheet1', index=False)
-writer.save()
+
+# df = pd.DataFrame(diccionario_juridica)
+
+# writer = ExcelWriter('cnv_juridica.xlsx')
+# df.to_excel(writer, 'Sheet1', index=False)
+# writer.save()
