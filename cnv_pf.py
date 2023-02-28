@@ -34,7 +34,7 @@ dropdown_agents = wait.until(
 select = Select(dropdown_agents)
 
 select.select_by_visible_text(
-    'Agentes Productores (Persona Jurídica)')
+    'Agentes Productores (Persona Física)')
 
 button_buscar = driver.find_element_by_xpath('//input[@value="BUSCAR"]')
 button_buscar.click()
@@ -44,7 +44,7 @@ bandera = True
 
 page = 0
 
-while bandera or (page==9):
+while bandera or (page==95):
     try:
         tbody = wait.until(EC.presence_of_element_located(
             (By.XPATH, '//*[@id="tablaagentes"]/tbody')))
