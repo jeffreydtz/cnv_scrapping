@@ -8,7 +8,7 @@ from selenium.common.exceptions import StaleElementReferenceException
 import time
 import pandas as pd
 from pandas import ExcelWriter
-from cnv_particular import socios
+from cnv_particular import socios2
 
 chromedriver.install()
 
@@ -44,7 +44,7 @@ bandera = True
 
 page = 0
 
-while bandera or (page==9):
+while bandera and (page<=9):
     try:
         tbody = wait.until(EC.presence_of_element_located(
             (By.XPATH, '//*[@id="tablaagentes"]/tbody')))
@@ -261,10 +261,12 @@ while bandera or (page==9):
 driver.quit()
 
 
-diccionario_juridica["Contratos"]= socios(diccionario_juridica["Contratos"])
-
 df = pd.DataFrame(diccionario_juridica)
 
-writer = ExcelWriter('cnv_juridica.xlsx')
+df['Contratos'] = [socios2(x) for x in df["Contratos"]]
+
+print(df['Contratos'])
+
+writer = pd.ExcelWriter('cnv_juridica1.xlsx')
 df.to_excel(writer, 'Sheet1', index=False)
 writer.save()
